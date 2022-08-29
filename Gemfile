@@ -26,6 +26,11 @@ gem "stimulus-rails"
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
+gem 'better_errors', '~> 2.9', '>= 2.9.1'
+gem 'simple_form', '~> 5.1'
+gem 'devise'
+gem 'rubocop', require: false
+gem 'activeadmin'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
