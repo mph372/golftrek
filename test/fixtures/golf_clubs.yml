@@ -1,0 +1,67 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  club_id: MyString
+  club_name: MyString
+  club_membership: MyString
+  number_of_holes: 1
+  address: MyString
+  city: MyString
+  state: MyString
+  country: MyString
+  postal_code: MyString
+  phone: MyString
+  website: MyString
+  contact_name: MyString
+  contact_title: MyString
+  email_address: MyString
+  driving_range: false
+  putting_green: false
+  chipping_green: false
+  practice_bunker: false
+  motor_cart: false
+  pull_cart: false
+  golf_clubs_rental: false
+  club_fitting: false
+  pro_shop: false
+  golf_lessons: false
+  caddie_hire: false
+  restaurant: false
+  reception_hall: false
+  changing_room: false
+  lockers: false
+  lodging_on_site: false
+  last_update: 2022-08-29
+
+two:
+  club_id: MyString
+  club_name: MyString
+  club_membership: MyString
+  number_of_holes: 1
+  address: MyString
+  city: MyString
+  state: MyString
+  country: MyString
+  postal_code: MyString
+  phone: MyString
+  website: MyString
+  contact_name: MyString
+  contact_title: MyString
+  email_address: MyString
+  driving_range: false
+  putting_green: false
+  chipping_green: false
+  practice_bunker: false
+  motor_cart: false
+  pull_cart: false
+  golf_clubs_rental: false
+  club_fitting: false
+  pro_shop: false
+  golf_lessons: false
+  caddie_hire: false
+  restaurant: false
+  reception_hall: false
+  changing_room: false
+  lockers: false
+  lodging_on_site: false
+  last_update: 2022-08-29

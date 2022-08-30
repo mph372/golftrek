@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @golf_club %>
+
+<div>
+  <%= link_to "Edit this golf club", edit_golf_club_path(@golf_club) %> |
+  <%= link_to "Back to golf clubs", golf_clubs_path %>
+
+  <%= button_to "Destroy this golf club", @golf_club, method: :delete %>
+</div>

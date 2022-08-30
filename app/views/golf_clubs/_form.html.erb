@@ -1,0 +1,43 @@
+
+<%= simple_form_for(@golf_club) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <%= f.input :club_id %>
+    <%= f.input :club_name %>
+    <%= f.input :club_membership %>
+    <%= f.input :number_of_holes %>
+    <%= f.input :address %>
+    <%= f.input :city %>
+    <%= f.input :state %>
+    <%= f.input :country %>
+    <%= f.input :postal_code %>
+    <%= f.input :phone %>
+    <%= f.input :website %>
+    <%= f.input :contact_name %>
+    <%= f.input :contact_title %>
+    <%= f.input :email_address %>
+    <%= f.input :driving_range %>
+    <%= f.input :putting_green %>
+    <%= f.input :chipping_green %>
+    <%= f.input :practice_bunker %>
+    <%= f.input :motor_cart %>
+    <%= f.input :pull_cart %>
+    <%= f.input :golf_clubs_rental %>
+    <%= f.input :club_fitting %>
+    <%= f.input :pro_shop %>
+    <%= f.input :golf_lessons %>
+    <%= f.input :caddie_hire %>
+    <%= f.input :restaurant %>
+    <%= f.input :reception_hall %>
+    <%= f.input :changing_room %>
+    <%= f.input :lockers %>
+    <%= f.input :lodging_on_site %>
+    <%= f.input :last_update %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

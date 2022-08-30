@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_30_001650) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_30_030954) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -40,6 +40,59 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_30_001650) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "golf_clubs", force: :cascade do |t|
+    t.string "club_id"
+    t.string "club_name"
+    t.string "club_membership"
+    t.integer "number_of_holes"
+    t.string "address"
+    t.string "city"
+    t.string "state"
+    t.string "country"
+    t.string "postal_code"
+    t.string "phone"
+    t.string "website"
+    t.string "contact_name"
+    t.string "contact_title"
+    t.string "email_address"
+    t.boolean "driving_range"
+    t.boolean "putting_green"
+    t.boolean "chipping_green"
+    t.boolean "practice_bunker"
+    t.boolean "motor_cart"
+    t.boolean "pull_cart"
+    t.boolean "golf_clubs_rental"
+    t.boolean "club_fitting"
+    t.boolean "pro_shop"
+    t.boolean "golf_lessons"
+    t.boolean "caddie_hire"
+    t.boolean "restaurant"
+    t.boolean "reception_hall"
+    t.boolean "changing_room"
+    t.boolean "lockers"
+    t.boolean "lodging_on_site"
+    t.date "last_update"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "itinerary_id"
+    t.index ["itinerary_id"], name: "index_golf_clubs_on_itinerary_id"
+  end
+
+  create_table "itineraries", force: :cascade do |t|
+    t.string "title"
+    t.date "start_date"
+    t.date "end_date"
+    t.bigint "user_id", null: false
+    t.boolean "public_itinerary"
+    t.boolean "influencer_created"
+    t.string "influencer_creator"
+    t.string "influencer_link"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_itineraries_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -62,4 +115,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_30_001650) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "golf_clubs", "itineraries"
+  add_foreign_key "itineraries", "users"
 end
