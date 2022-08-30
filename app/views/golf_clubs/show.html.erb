@@ -1,5 +1,9 @@
 <p style="color: green"><%= notice %></p>
 
+<%= image_tag(LinkThumbnailer.generate("#{@golf_club.website}").images.first.src.to_s) %>
+
+<p> <%= LinkThumbnailer.generate("#{@golf_club.website}").description %>  </p>
+
 <%= render @golf_club %>
 
 <div>

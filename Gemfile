@@ -35,6 +35,7 @@ gem 'bootstrap', '~> 5.2.0'
 gem 'jquery-rails'
 gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
 gem 'country_select'
+gem 'link_thumbnailer'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
