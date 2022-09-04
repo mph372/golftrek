@@ -1,0 +1,18 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Golf courses</h1>
+
+<div id="golf_courses">
+  <% @golf_courses.each do |golf_course| %>
+    <p>
+      <%= link_to "#{golf_course.course_name}", golf_course %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New golf course", new_golf_course_path %>
+
+<%= form_tag import_golf_courses_path, multipart: true do %>
+  <%= file_field_tag :file%>
+  <%= submit_tag "Import" %>
+<%end%>

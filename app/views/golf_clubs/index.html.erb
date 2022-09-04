@@ -4,11 +4,15 @@
 
 <div id="golf_clubs">
   <% @golf_clubs.each do |golf_club| %>
-    <%= render golf_club %>
     <p>
-      <%= link_to "Show this golf club", golf_club %>
+      <%= link_to "#{golf_club.club_name}", golf_club %>
     </p>
   <% end %>
 </div>
 
 <%= link_to "New golf club", new_golf_club_path %>
+
+<%= form_tag import_golf_clubs_path, multipart: true do %>
+  <%= file_field_tag :file%>
+  <%= submit_tag "Import" %>
+<%end%>

@@ -1,0 +1,31 @@
+
+<%= simple_form_for(@golf_course) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+  <% @golf_course.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+
+  <div class="form-inputs">
+    <%= f.input :course_id %>
+    <%= f.input :club_id %>
+    <%= f.input :course_name %>
+    <%= f.input :holes %>
+    <%= f.input :par %>
+    <%= f.input :course_type %>
+    <%= f.input :course_architect %>
+    <%= f.input :open_date %>
+    <%= f.input :guest_policy %>
+    <%= f.input :currency %>
+    <%= f.input :weekday_price %>
+    <%= f.input :weekend_price %>
+    <%= f.input :twilight_price %>
+    <%= f.input :fairway %>
+    <%= f.input :green %>
+    <%= f.input :last_update %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

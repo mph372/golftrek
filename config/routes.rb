@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
+  resources :golf_courses do
+    collection { post :import }
+  end
   resources :itineraries
-  resources :golf_clubs
+  resources :golf_clubs do
+      collection { post :import }
+  end
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   devise_for :users

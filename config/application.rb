@@ -1,6 +1,9 @@
 require_relative "boot"
 
 require "rails/all"
+require 'csv'
+require 'roo'
+require 'dead_end'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -20,3 +23,10 @@ module Golftrek
     # config.eager_load_paths << Rails.root.join("extras")
   end
 end
+
+Google::Maps.configure do |config|
+  config.authentication_mode = Google::Maps::Configuration::API_KEY
+  config.api_key = ENV["google_maps_api"]
+end
+
+GoogleSearch.api_key = ENV["google_search_api"]

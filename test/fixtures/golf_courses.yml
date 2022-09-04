@@ -1,0 +1,37 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  course_id: MyString
+  club_id: MyString
+  course_name: MyString
+  holes: 1
+  par: 1
+  course_type: MyString
+  course_architect: MyString
+  open_date: 2022-09-02
+  guest_policy: MyString
+  currency: MyString
+  weekday_price: 1
+  weekend_price: 1
+  twilight_price: 1
+  fairway: MyString
+  green: MyString
+  last_update: 2022-09-02
+
+two:
+  course_id: MyString
+  club_id: MyString
+  course_name: MyString
+  holes: 1
+  par: 1
+  course_type: MyString
+  course_architect: MyString
+  open_date: 2022-09-02
+  guest_policy: MyString
+  currency: MyString
+  weekday_price: 1
+  weekend_price: 1
+  twilight_price: 1
+  fairway: MyString
+  green: MyString
+  last_update: 2022-09-02

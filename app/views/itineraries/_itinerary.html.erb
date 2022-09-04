@@ -24,4 +24,17 @@
     <%= itinerary.public_itinerary %>
   </p>
 
+  <% itinerary.golf_clubs.each_with_index do |golf_club, index| %>
+    
+    <% unless index == 0 %>
+    <%= Google::Maps.distance(golf_club.full_address, itinerary.golf_clubs[index-1].full_address) %>
+    <%= Google::Maps.duration(golf_club.full_address, itinerary.golf_clubs[index-1].full_address) %>
+    <%end%>
+    <br>
+    <div class="border rounded shadow-sm p-3">
+    <%= link_to "#{golf_club.club_name}", golf_club %>
+    </div>
+    <br>
+    <%end%>
+<br>
 </div>

@@ -1,0 +1,126 @@
+<div id="<%= dom_id golf_course %>">
+
+  <%#= image_tag(LinkThumbnailer.generate("#{golf_course.golf_club.website}").images.first.src.to_s) %>
+  <h3><%= golf_course.golf_club.club_name %></h3>
+  <h1><strong> <%= golf_course.course_name %></strong></h1>
+  <h5><%= golf_course.golf_club.city %>, <%= golf_course.golf_club.state %></h5>
+   <hr>
+
+
+
+    <div class="row">
+      <div class="col-7">
+       
+        <div class="row">
+          <div class="col">
+            <h5><strong>Course Architect</strong><br><%= golf_course.course_architect %></h5>
+            <br>
+            <h5><strong>Year Opened</strong><br><%= golf_course.open_date %></h5>
+          </div>
+        </div>        
+      </div>     
+      <br>
+      <div class="col-3 border rounded shadow p-3">
+        <h5><strong>Weekday Price</strong><br><%= golf_course.weekday_price %></h5>
+        <br>
+        <h5><strong>Weekend Price</strong><br><%= golf_course.weekend_price %></h5>
+        <br>
+        <h5><strong>Twilight Price</strong><br><%= golf_course.twilight_price %></h5>
+        <br>
+        
+        <%= link_to "View Website", url_with_protocol(golf_course.golf_club.website), :class => "btn btn-primary", target: :_blank %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+
+      </div>
+      <div class="col">
+      
+      </div>
+    
+    
+    </div>
+  
+
+  <p>
+    <strong>Course:</strong>
+    <%= golf_course.course_id %>
+  </p>
+
+  <p>
+    <strong>Club:</strong>
+    <%= golf_course.club_id %>
+  </p>
+
+  <p>
+    <strong>Course name:</strong>
+   
+  </p>
+
+  <p>
+    <strong>Holes:</strong>
+    <%= golf_course.holes %>
+  </p>
+
+  <p>
+    <strong>Par:</strong>
+    <%= golf_course.par %>
+  </p>
+
+  <p>
+    <strong>Course type:</strong>
+    <%= golf_course.course_type %>
+  </p>
+
+  <p>
+    <strong>Course architect:</strong>
+    <%= golf_course.course_architect %>
+  </p>
+
+  <p>
+    <strong>Open date:</strong>
+    <%= golf_course.open_date %>
+  </p>
+
+  <p>
+    <strong>Guest policy:</strong>
+    <%= golf_course.guest_policy %>
+  </p>
+
+  <p>
+    <strong>Currency:</strong>
+    <%= golf_course.currency %>
+  </p>
+
+  <p>
+    <strong>Weekday price:</strong>
+    <%= golf_course.weekday_price %>
+  </p>
+
+  <p>
+    <strong>Weekend price:</strong>
+    <%= golf_course.weekend_price %>
+  </p>
+
+  <p>
+    <strong>Twilight price:</strong>
+    <%= golf_course.twilight_price %>
+  </p>
+
+  <p>
+    <strong>Fairway:</strong>
+    <%= golf_course.fairway %>
+  </p>
+
+  <p>
+    <strong>Green:</strong>
+    <%= golf_course.green %>
+  </p>
+
+  <p>
+    <%= golf_course.last_update %>
+  </p>
+
+</div>

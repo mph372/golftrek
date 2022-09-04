@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_30_030954) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_03_180008) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -75,7 +75,32 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_30_030954) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "itinerary_id"
+    t.float "latitude"
+    t.float "longitude"
     t.index ["itinerary_id"], name: "index_golf_clubs_on_itinerary_id"
+  end
+
+  create_table "golf_courses", force: :cascade do |t|
+    t.string "course_id"
+    t.string "club_id"
+    t.string "course_name"
+    t.integer "holes"
+    t.integer "par"
+    t.string "course_type"
+    t.string "course_architect"
+    t.string "guest_policy"
+    t.string "currency"
+    t.integer "weekday_price"
+    t.integer "weekend_price"
+    t.integer "twilight_price"
+    t.string "fairway"
+    t.string "green"
+    t.date "last_update"
+    t.bigint "golf_club_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "open_date"
+    t.index ["golf_club_id"], name: "index_golf_courses_on_golf_club_id"
   end
 
   create_table "itineraries", force: :cascade do |t|

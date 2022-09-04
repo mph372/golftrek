@@ -36,6 +36,15 @@ gem 'jquery-rails'
 gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
 gem 'country_select'
 gem 'link_thumbnailer'
+gem 'filterrific'
+gem 'material_icons'
+gem "figaro"
+gem 'google-maps'
+gem 'image_suckr'
+gem 'google_search_results'
+gem "google_custom_search_api"
+gem "roo"
+gem "dead_end"
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
