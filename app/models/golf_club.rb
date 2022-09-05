@@ -2,6 +2,7 @@ class GolfClub < ApplicationRecord
     before_validation :smart_add_url_protocol
     has_many :golf_courses
     belongs_to :itinerary, optional: true
+    belongs_to :line_item
 
     def full_address
       "#{address}, #{city}, #{state}, #{country}"

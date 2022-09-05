@@ -5,6 +5,18 @@ class GolfClubsController < InheritedResources::Base
     redirect_to root_url, notice: "Golf Clubs imported."
   end
 
+  def add_to_itinerary(golf_club, itinerary)
+    item = LineItem.create!
+    item.update(golf_club_id: golf_club.id)
+    item.update(itinerary_id: itinerary.id)
+  end
+
+  def show
+    @golf_club = GolfClub.find(params[:id])
+    @line_item = LineItem.new
+  end
+
+
   private
 
     def golf_club_params

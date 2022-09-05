@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  itinerary: one
+  date: 2022-09-04
+  time: 2022-09-04 16:21:49
+
+two:
+  itinerary: two
+  date: 2022-09-04
+  time: 2022-09-04 16:21:49
