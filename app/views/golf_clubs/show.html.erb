@@ -6,22 +6,7 @@
 
 <%= render @golf_club %>
 
-<div class="">
-    <h3>Choose your itinerary</h3>
-    <%= form_tag(golf_clubs_url, {:method => 'get'}) do |f| %>
-        <select name="itinerary_id" id="itinerary_id">
 
-            <!-- Select a Wishlist -->
-            <option value="" <%= !@itinerary ? "selected" : "" %>>SELECT A WISHLIST</option>
-
-            <% Itinerary.all.each do |w| %>
-                <option value="<%=w.id %>" <%= "#{w.id}" === @itinerary ? "selected" : "" %>><%=w.title%></option>
-            <% end %>
-        </select>
-
-        <%= submit_tag('Update', :name => nil) %>
-    <% end %>
-</div>
 
 <div>
   <%= link_to "Edit this golf club", edit_golf_club_path(@golf_club) %> |

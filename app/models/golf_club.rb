@@ -3,6 +3,8 @@ class GolfClub < ApplicationRecord
     has_many :golf_courses
     belongs_to :itinerary, optional: true
     belongs_to :line_item
+    geocoded_by :address
+    after_validation :geocode, if: :address_changed?
 
     def full_address
       "#{address}, #{city}, #{state}, #{country}"

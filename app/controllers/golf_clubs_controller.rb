@@ -14,6 +14,7 @@ class GolfClubsController < InheritedResources::Base
   def show
     @golf_club = GolfClub.find(params[:id])
     @line_item = LineItem.new
+    @client = GooglePlaces::Client.new(ENV['google_maps_api'])
   end
 
 

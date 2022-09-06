@@ -145,6 +145,7 @@ GEM
     formtastic (4.0.0)
       actionpack (>= 5.2.0)
     formtastic_i18n (0.7.0)
+    geocoder (1.8.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
     google-maps (3.0.7)
@@ -155,6 +156,8 @@ GEM
     google_custom_search_api (2.0.0)
       addressable
       httparty
+    google_places (2.0.0)
+      httparty (>= 0.13.1)
     google_search_results (2.2.0)
     has_scope (0.8.0)
       actionpack (>= 5.2)
@@ -405,8 +408,10 @@ DEPENDENCIES
   faker!
   figaro
   filterrific
+  geocoder
   google-maps
   google_custom_search_api
+  google_places
   google_search_results
   image_suckr
   importmap-rails

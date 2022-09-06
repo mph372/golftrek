@@ -42,4 +42,10 @@ class GolfCourse < ApplicationRecord
         end
     end
 
+    def has_prices
+        if weekday_price > 0 || weekend_price > 0 || twilight_price > 0 
+            true
+        end
+    end
+
 end

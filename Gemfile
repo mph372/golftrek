@@ -45,6 +45,8 @@ gem 'google_search_results'
 gem "google_custom_search_api"
 gem "roo"
 gem "dead_end"
+gem 'google_places'
+gem 'geocoder'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"

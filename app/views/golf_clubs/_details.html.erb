@@ -1,0 +1,56 @@
+<div class="border shadow-sm p-3">
+        <h5 class="text-center">Course Details</h5>
+        <hr>
+        <% if golf_club.golf_courses.count == 1 %>
+        <% golf_course = golf_club.golf_courses.first %>
+          <table class="table table-sm w-auto table-borderless">
+            <thead>
+              <tr>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Architect:</strong></td>
+                <td><%=golf_course.course_architect%></td>
+              </tr>
+              <tr>
+                <td><strong>Par:</strong></td>
+                <td><%=golf_course.par%></td>
+              </tr>
+              <tr>
+                <td><strong>Holes:</strong></td>
+                <td><%=golf_course.holes%></td>
+              </tr>
+              <tr>
+                <td><strong>Open Date:</strong></td>
+                <td><%=golf_course.open_date%></td>
+                
+              </tr>
+                            
+            </tbody>
+          </table>
+          <%if golf_course.has_prices %>
+          <hr>
+          <table class="table table-sm w-auto table-borderless">
+            <thead>
+              <tr>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Weekday Rate:</strong></td>
+                <td>$<%=golf_course.weekday_price%></td>
+              </tr>
+              <tr>
+                <td><strong>Weekend Rate:</strong></td>
+                <td>$<%=golf_course.weekend_price%></td>
+              </tr>
+              <tr>
+                <td><strong>Twilight Rate:</strong></td>
+                <td>$<%=golf_course.twilight_price%></td>
+              </tr>                            
+            </tbody>
+          </table>  
+          <%end%> 
+        <%end%>
+      </div>
