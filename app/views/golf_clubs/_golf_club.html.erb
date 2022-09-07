@@ -1,30 +1,45 @@
 <div id="<%= dom_id golf_club %>">
  
-<%  %> 
-<% @spot = @client.spots_by_query("#{golf_club.club_name} golf club", detail: true).first %>
-<% @spot.photos.each do |photo| %>
-<% url = photo.fetch_url(800) %>
-<%#= image_tag(url) %>
-<%end %>
 
+
+    <% @spot = @client.spots_by_query("#{golf_club.club_name} golf club", detail: true).first %>
+
+<%#= image_tag(@spot.photos[0].fetch_url(800), class: "img-fluid golf-club-img rounded")%>
 
 <div class="container">
   <div class="row">
-    <div class="col-8">
-       <div><%#= image_tag(@spot.photos[0].fetch_url(600), class: "img-fluid")%></div>
-    </div>
-    <div class="col-4">
+    <ul class="gallery">
+      <li class="wide"><img width="768" height="576" src=<%= @spot.photos[0].fetch_url(800) %> alt="" title="" loading="lazy" /></li>
+      <li><img width="768" height="576" src=<%= @spot.photos[1].fetch_url(800) %> alt="" title="" loading="lazy" /></li>
+      <li class=""><img width="768" height="576" src=<%= @spot.photos[2].fetch_url(800) %> alt="" title="" loading="lazy" /></li>
+      <li ><img width="768" height="576" src=<%= @spot.photos[3].fetch_url(800) %> alt="" title="" loading="lazy" /></li>
+      <li class="wider"><img width="768" height="576" src=<%= @spot.photos[4].fetch_url(800) %> alt="" title="" loading="lazy" /></li>
+      
+      
+    </ul>
 
-    </div>
   </div>
-  <div class="row">
+  <div class="row mt-4">
     <div class="col-8">
       <h1 class="m3"><strong> <%= golf_club.club_name %></strong></h1>
       <h5><%= golf_club.city %>, <%= golf_club.state %></h5>
+      <hr>
+      <%= render "amenities", golf_club: @golf_club %>
+    </div>
+    <div class="col-4">
+     <%= render "details", golf_club: @golf_club %>
+    </div>
+  </div>
+  <div class="row ">
+      <div class="col-8">
+      
+      
+      </div>
+    <div class="col-4">
       
     </div>
-    <div class="col-2">
-      <iframe
+  </div>
+   <iframe
       width="300"
       height="450"
       style="border:0"
@@ -33,17 +48,6 @@
       referrerpolicy="no-referrer-when-downgrade"
       src="https://www.google.com/maps/embed/v1/place?key=<%=ENV["google_maps_api"]%>&q=<%="#{golf_club.club_name}golf course#{golf_club.city}"%>&zoom=10">
     </iframe>
-    </div>
-  </div>
-  <div class="row ">
-      <div class="col-8">
-      <hr>
-      <%= render "amenities", golf_club: @golf_club %>
-      </div>
-    <div class="col-4">
-      <%= render "details", golf_club: @golf_club %>
-    </div>
-  </div>
 </div>
 
 
