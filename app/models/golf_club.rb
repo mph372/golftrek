@@ -5,10 +5,38 @@ class GolfClub < ApplicationRecord
     belongs_to :line_item
     geocoded_by :address
     after_validation :geocode, if: :address_changed?
+    has_many_attached :images
 
     def full_address
       "#{address}, #{city}, #{state}, #{country}"
     end
+
+    def find_google_spot
+      if google_places_spot.nil?
+        @client = GooglePlaces::Client.new(ENV['google_maps_api'])
+        @spot = @client.spots_by_query("#{club_name} golf club #{city} #{state}", detail: true).first
+        update(google_places_spot: @spot.place_id)
+      end
+    end
+
+    def download_google_images
+      @client = GooglePlaces::Client.new(ENV['google_maps_api'])
+      @spot = @client.spot(google_places_spot)
+
+      @spot.photos.each_with_index do |photo, index|
+        downloaded_image = URI.open(photo.fetch_url(800))
+        self.images.attach(io: downloaded_image, filename: "#{club_name}_#{index}")
+      end
+    end
+
+    def extract_images
+      html = URI.open(website).read
+      URI.extract(html).select{ |l| l[/\.(?:gif|png|jpe?g)\b/]}.each_with_index do |image, index|
+        self.images.attach(io: image, filename: "#{club_name}_#{index}")
+      end
+    end
+
+    
 
     def self.import(file)
       spreadsheet = open_spreadsheet(file) # open spreadsheet

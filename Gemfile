@@ -47,6 +47,7 @@ gem "roo"
 gem "dead_end"
 gem 'google_places'
 gem 'geocoder'
+gem 'ransack'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"

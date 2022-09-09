@@ -2,27 +2,23 @@
  
 
 
-    <% @spot = @client.spots_by_query("#{golf_club.club_name} golf club", detail: true).first %>
+
 
 <%#= image_tag(@spot.photos[0].fetch_url(800), class: "img-fluid golf-club-img rounded")%>
 
 <div class="container">
   <div class="row">
-    <ul class="gallery">
-      <li class="wide"><img width="768" height="576" src=<%= @spot.photos[0].fetch_url(800) %> alt="" title="" loading="lazy" /></li>
-      <li><img width="768" height="576" src=<%= @spot.photos[1].fetch_url(800) %> alt="" title="" loading="lazy" /></li>
-      <li class=""><img width="768" height="576" src=<%= @spot.photos[2].fetch_url(800) %> alt="" title="" loading="lazy" /></li>
-      <li ><img width="768" height="576" src=<%= @spot.photos[3].fetch_url(800) %> alt="" title="" loading="lazy" /></li>
-      <li class="wider"><img width="768" height="576" src=<%= @spot.photos[4].fetch_url(800) %> alt="" title="" loading="lazy" /></li>
-      
-      
-    </ul>
+    <h2 class=""><%= golf_club.club_name %></h2>
+    <h6><%= golf_club.city %>, <%= golf_club.state %></h6>
+  </div>
+  <div class="row">
+
+  <%#= render 'images' %>
 
   </div>
   <div class="row mt-4">
     <div class="col-8">
-      <h1 class="m3"><strong> <%= golf_club.club_name %></strong></h1>
-      <h5><%= golf_club.city %>, <%= golf_club.state %></h5>
+     
       <hr>
       <%= render "amenities", golf_club: @golf_club %>
     </div>

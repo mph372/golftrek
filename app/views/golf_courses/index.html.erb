@@ -2,6 +2,14 @@
 
 <h1>Golf courses</h1>
 
+<%= search_form_for @search do |f| %>
+  <div class="field">
+    <%= f.label :course_name_cont, "Name contains" %>
+    <%= f.text_field :course_name_cont %>
+  </div>
+  <div class="actions"><%= f.submit "Search" %></div>
+<%end%>
+
 <div id="golf_courses">
   <% @golf_courses.each do |golf_course| %>
     <p>

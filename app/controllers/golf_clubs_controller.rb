@@ -1,5 +1,6 @@
 class GolfClubsController < InheritedResources::Base
 
+  
   def import
     GolfClub.import(params[:file])
     redirect_to root_url, notice: "Golf Clubs imported."
@@ -15,6 +16,9 @@ class GolfClubsController < InheritedResources::Base
     @golf_club = GolfClub.find(params[:id])
     @line_item = LineItem.new
     @client = GooglePlaces::Client.new(ENV['google_maps_api'])
+    if @golf_club.google_places_spot.nil?
+    @golf_club.find_google_spot
+    end
   end
 
 

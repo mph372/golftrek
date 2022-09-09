@@ -1,0 +1,10 @@
+    <% @spot = @client.spot(golf_club.google_places_spot)%>
+    
+    <ul class="gallery">
+      <li class="wide"><img width="768" height="576" src=<%= @spot.photos[0].fetch_url(800) %> alt="" title="" loading="lazy" /></li>
+      <li><img width="768" height="576" src=<%= @spot.photos[1].fetch_url(800) %> alt="" title="" loading="lazy" /></li>
+      <li class=""><img width="768" height="576" src=<%= @spot.photos[2].fetch_url(800) %> alt="" title="" loading="lazy" /></li>
+      <li ><img width="768" height="576" src=<%= @spot.photos[3].fetch_url(800) %> alt="" title="" loading="lazy" /></li>
+      <li class="wider"><img width="768" height="576" src=<%= @spot.photos[4].fetch_url(800) %> alt="" title="" loading="lazy" /></li>
+
+    </ul>
