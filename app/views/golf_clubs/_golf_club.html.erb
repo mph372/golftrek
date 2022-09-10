@@ -10,6 +10,8 @@
   <div class="row">
     <h2 class=""><%= golf_club.club_name %></h2>
     <h6><%= golf_club.city %>, <%= golf_club.state %></h6>
+    <h6><%= golf_club.club_membership %></h6>
+    <p> <%= golf_club.full_address %></p>
   </div>
   <div class="row">
 
@@ -35,6 +37,40 @@
       
     </div>
   </div>
+  
+    <div class="row">
+        <% golf_club.golf_courses.each do |course| %>
+        <div class="border">
+          <div class="row">
+            <% if course.golf_club.golf_courses.count == 1 %>
+            <%=  link_to "#{course.course_name} Golf Course" , course %> 
+            <%else%>
+            <%=  link_to "#{golf_club.club_name} - #{course.course_name}", course %> 
+            <%end%>
+          <%= button_to 'Add to Itinerary', line_items_path(:golf_course_id => course.id) %>
+          </div>
+          <div class="row">
+            <div class="col">
+              <strong>Par: </strong><%= course.par %>
+            </div>
+            <div class="col">
+              <strong>Architect: </strong><%= course.course_architect %>
+            </div>
+            <div class="col">
+              <strong>Holes: </strong><%= course.holes %>
+            </div>
+            <div class="col">
+              <strong>Year Opened: </strong><%= course.open_date %>
+            </div>
+            <div class="col">
+              <strong>Price Range: </strong><%= course.price_range %>
+            </div>
+          </div>
+        </div>
+        <br>
+      <%end%>
+    </div>
+  
    <iframe
       width="300"
       height="450"
@@ -44,6 +80,19 @@
       referrerpolicy="no-referrer-when-downgrade"
       src="https://www.google.com/maps/embed/v1/place?key=<%=ENV["google_maps_api"]%>&q=<%="#{golf_club.club_name}golf course#{golf_club.city}"%>&zoom=10">
     </iframe>
+
+    <div>
+      <div class="row">
+      <% if golf_club.geocoded? %>
+      <% @nearby_clubs = golf_club.nearbys(50) %>
+        <% @nearby_clubs.each do |nearby_club| %>
+        <%= link_to "#{nearby_club.club_name}", nearby_club %> 
+        <%= number_with_precision(Geocoder::Calculations.distance_between(nearby_club, golf_club), precision: 2) %> mi
+        <%end%>
+      <%end%>
+      </div>
+    </div>
+    
 </div>
 
 
@@ -57,4 +106,3 @@
 
 </div>
 
-<%= render partial: "line_items/form" %>

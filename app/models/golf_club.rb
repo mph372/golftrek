@@ -1,14 +1,13 @@
 class GolfClub < ApplicationRecord
     before_validation :smart_add_url_protocol
     has_many :golf_courses
-    belongs_to :itinerary, optional: true
-    belongs_to :line_item
-    geocoded_by :address
-    after_validation :geocode, if: :address_changed?
+    belongs_to :line_item, optional: true
+    geocoded_by :full_address
+    after_validation :geocode
     has_many_attached :images
 
     def full_address
-      "#{address}, #{city}, #{state}, #{country}"
+      [address, city, state, country].compact.join(', ')
     end
 
     def find_google_spot
@@ -36,7 +35,14 @@ class GolfClub < ApplicationRecord
       end
     end
 
-    
+    def self.open_spreadsheet(file)
+      case File.extname(file.original_filename)
+      when ".csv" then Roo::CSV.new(file.path, csv_options: {encoding: "iso-8859-1:utf-8"})
+      when ".xls" then Roo::Excel.new(file.path, packed: nil, file_warning: :ignore)
+      when ".xlsx" then Roo::Excelx.new(file.path, packed: nil, file_warning: :ignore)
+      else raise "Unknown file type: #{file.original_filename}"
+      end
+    end
 
     def self.import(file)
       spreadsheet = open_spreadsheet(file) # open spreadsheet
@@ -44,87 +50,180 @@ class GolfClub < ApplicationRecord
       (2..spreadsheet.last_row).each do |i|
           row = Hash[[header, spreadsheet.row(i)].transpose]
           t = GolfClub.new
-          t.club_id = row["Facility ID"]
-          t.club_name = row["Club Name"]
-          t.club_membership = row["Club Membership"]
-          t.number_of_holes = row["Number of Holes"]
-          t.address = row["Address"]
-          t.city = row["City"]
-          t.state = row["State"]
-          t.country = row["Country"]
-          t.postal_code = row["Postal Code"]
-          t.phone = row["Phone"]
-          t.website = row["Website"]
-          t.contact_name = row["Contact Name"]
-          t.contact_title = row["Contact Title"]
-          t.email_address = row["Email Address"]
-          if row["Driving Range"] == "Yes"
+          t.club_id = row["club_id"]
+          t.club_name = row["club_name"]
+          t.club_membership = row["club_membership"]
+          t.number_of_holes = row["number_of_holes"]
+          t.address = row["address"]
+          t.city = row["city"]
+          t.state = row["state"]
+          t.country = row["country"]
+          t.postal_code = row["postal_code"]
+          t.phone = row["phone"]
+          t.website = row["website"]
+          t.contact_name = row["contact_name"]
+          t.contact_title = row["contact_title"]
+          t.email_address = row["email_address"]
+
+          if row["driving_range"] == "Yes"
           t.driving_range = true
+          else
+          t.driving_range = false
           end
-          if row["Putting Green"] == "Yes"
+
+          if row["putting_green"] == "Yes"
           t.putting_green = true
+          else 
+          t.putting_green = false  
           end
-          if row["Chipping Green"] == "Yes"
+
+          if row["chipping_green"] == "Yes"
           t.chipping_green = true
+          else
+          t.chipping_green = false  
           end
-          if row["Practice Bunker"] == "Yes"
+
+          if row["practice_bunker"] == "Yes"
           t.practice_bunker = true
+          else
+          t.practice_bunker = false
           end
-          if row["Motor Cart"] == "Yes"
+
+          if row["motor_cart"] == "Yes"
           t.motor_cart = true
+          else
+          t.motor_cart = false
           end
-          if row["Pull Cart"] == "Yes"
+          
+          if row["pull_cart"] == "Yes"
           t.pull_cart = true
+          else
+          t.pull_cart = false
           end
-          if row["Golf Clubs Rental"] == "Yes"
+
+          if row["golf_clubs_rental"] == "Yes"
           t.golf_clubs_rental = true
+          else
+          t.golf_clubs_rental = false
           end
-          if row["Club Fitting"] == "Yes"
+
+          if row["club_fitting"] == "Yes"
           t.club_fitting = true
+          else
+          t.club_fitting = false
           end
-          if row["Pro Shop"] == "Yes"
+
+          if row["pro_shop"] == "Yes"
           t.pro_shop = true
+          else
+          t.pro_shop = false
           end
-          if row["Golf Lessons"] == "Yes"
+
+          if row["golf_lessons"] == "Yes"
           t.golf_lessons = true
+          else
+          t.golf_lessons = false
           end
-          if row["Caddie Hire"] == "Yes"
+
+          if row["caddie_hire"] == "Yes"
           t.caddie_hire = true
+          else
+          t.caddie_hire = false
           end
-          if row["Restaurant"] == "Yes"
+
+          if row["restaurant"] == "Yes"
           t.restaurant = true
+          else
+            t.restaurant = false
           end
-          if row["Reception Hall"] == "Yes"
+
+          if row["reception_hall"] == "Yes"
           t.reception_hall = true
+          else
+          t.reception_hall = false
           end
-          if row["Changning Room"] == "Yes"
+
+          if row["changing_room"] == "Yes"
           t.changing_room = true
+          else
+          t.changing_room = false
           end
-          if row["Lockers"] == "Yes"
+
+          if row["lockers"] == "Yes"
           t.lockers = true
+          else
+          t.lockers = false 
           end
-          if row["Lodging on Site"] == "Yes"
+
+          if row["lodging_on_site"] == "Yes"
           t.lodging_on_site = true
+          else
+          t.lodging_on_site = false  
           end
-          t.save
-        
+
+          t.save 
       end
   end
 
-  def self.open_spreadsheet(file)
-    case File.extname(file.original_filename)
-    when ".csv" then Roo::CSV.new(file.path, csv_options: {encoding: "iso-8859-1:utf-8"})
-    when ".xls" then Roo::Excel.new(file.path, packed: nil, file_warning: :ignore)
-    when ".xlsx" then Roo::Excelx.new(file.path, packed: nil, file_warning: :ignore)
-    else raise "Unknown file type: #{file.original_filename}"
-    end
-  end
+
 
   def smart_add_url_protocol
     unless website[/\Ahttp:\/\//] || website[/\Ahttps:\/\//]
       self.website = "http://#{website}"
     end
   end
+=begin
+  def booleans
+    if row["driving_range"] == "Yes"
+      t.driving_range = true
+      end
+      if row["putting_green"] == "Yes"
+      t.putting_green = true
+      end
+      if row["chipping_green"] == "Yes"
+      t.chipping_green = true
+      end
+      if row["practice_bunker"] == "Yes"
+      t.practice_bunker = true
+      end
+      if row["motor_cart"] == "Yes"
+      t.motor_cart = true
+      end
+      if row["pull_cart"] == "Yes"
+      t.pull_cart = true
+      end
+      if row["golf_clubs_rental"] == "Yes"
+      t.golf_clubs_rental = true
+      end
+      if row["club_fitting"] == "Yes"
+      t.club_fitting = true
+      end
+      if row["pro_shop"] == "Yes"
+      t.pro_shop = true
+      end
+      if row["golf_lessons"] == "Yes"
+      t.golf_lessons = true
+      end
+      if row["caddie_hire"] == "Yes"
+      t.caddie_hire = true
+      end
+      if row["restaurant"] == "Yes"
+      t.restaurant = true
+      end
+      if row["reception_hall"] == "Yes"
+      t.reception_hall = true
+      end
+      if row["changing_room"] == "Yes"
+      t.changing_room = true
+      end
+      if row["lockers"] == "Yes"
+      t.lockers = true
+      end
+      if row["lodging_on_site"] == "Yes"
+      t.lodging_on_site = true
+      end
+  end
+=end
 
     protected
     

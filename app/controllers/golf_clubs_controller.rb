@@ -1,6 +1,10 @@
 class GolfClubsController < InheritedResources::Base
 
-  
+  def index
+    @search = GolfClub.ransack(params[:q])
+    @golf_clubs = @search.result(distinct: true)
+  end
+
   def import
     GolfClub.import(params[:file])
     redirect_to root_url, notice: "Golf Clubs imported."

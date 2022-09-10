@@ -3,8 +3,8 @@
  
 
   <div class="form-inputs">
-    <%= f.collection_select :itinerary_id, Itinerary.all, :id, :title %>
-   <%= f.hidden_field :golf_club_id, value: @golf_club.id %>
+   <%= f.hidden_field :itinerary_id, value: current_user.itineraries.last.id %>
+   <%= f.hidden_field :golf_course_id, value: golf_course.id %>
   </div>
 
   <div class="form-actions">

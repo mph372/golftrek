@@ -1,10 +1,28 @@
 class GolfCourse < ApplicationRecord
     belongs_to :golf_club, optional: true
+    belongs_to :line_item, optional: true
 
     def associate_golf_clubs
         if GolfClub.where(:club_id => club_id).exists?
             c = GolfClub.where(:club_id => club_id).last
             update(golf_club_id: c.id)
+        end
+    end
+
+    def price_range
+        if has_prices == true
+            average = (weekday_price + twilight_price + weekend_price) / 3
+            if average <= 50
+                return "$"
+            elsif average > 50 && average <= 100
+                return "$$"
+            elsif average > 100 && average <= 200
+                return "$$$"
+            elsif average > 200 && average <= 350
+                return "$$$$"
+            elsif average > 350 
+                return "$$$$$"
+            end
         end
     end
 
@@ -23,22 +41,23 @@ class GolfCourse < ApplicationRecord
         (2..spreadsheet.last_row).each do |i|
             row = Hash[[header, spreadsheet.row(i)].transpose]
             t = GolfCourse.new
-            t.course_id = row["Course ID"]
-            t.club_id = row["Facility ID"]
-            t.course_name = row["Course Name"]
-            t.holes = row["Holes"]
-            t.par = row["Par"]
-            t.course_type = row["Course Type"]
-            t.course_architect = row["Course Architect"]
-            t.open_date = row["Open Date"]
-            t.guest_policy = row["Guest Policy"]
-            t.currency = row["Currency"]
-            t.weekday_price = row["Weekday Price"]
-            t.weekend_price = row["Weekend Price"]
-            t.twilight_price = row["Twilight Price"]
-            t.fairway = row["Fairway"]
-            t.green = row["Green"]
+            t.course_id = row["course_id"]
+            t.club_id = row["club_id"]
+            t.course_name = row["course_name"]
+            t.holes = row["holes"]
+            t.par = row["par"]
+            t.course_type = row["course_type"]
+            t.course_architect = row["course_architect"]
+            t.open_date = row["open_date"]
+            t.guest_policy = row["guest_policy"]
+            t.currency = row["currency"]
+            t.weekday_price = row["weekday_price"]
+            t.weekend_price = row["weekend_price"]
+            t.twilight_price = row["twilight_price"]
+            t.fairway = row["fairway"]
+            t.green = row["green"]
             t.save
+            t.associate_golf_clubs
         end
     end
 

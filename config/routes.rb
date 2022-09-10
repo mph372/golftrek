@@ -1,11 +1,16 @@
 Rails.application.routes.draw do
   get 'line_items/new'
-  get 'line_items/create'
+  post 'line_items' => "line_items#create"
+  get 'line_items/:id' => "line_items#show", as: "line_item"
+  delete 'line_items/:id' => "line_items#destroy"
+  
   resources :golf_courses do
     collection { post :import }
   end
   resources :itineraries
-  resources :line_items
+  resources :line_items do
+    collection { post :add_to_itinerary }
+  end
   resources :golf_clubs do
       collection { post :import }
   end
@@ -13,6 +18,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   devise_for :users
   get 'home/index'
+  
 
 
 

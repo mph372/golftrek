@@ -1,2 +1,10 @@
 <h1>LineItems#new</h1>
 <p>Find me in app/views/line_items/new.html.erb</p>
+
+<% if @line_item.errors.any? %>
+    <ul>
+    <% @line_item.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  <% end %>

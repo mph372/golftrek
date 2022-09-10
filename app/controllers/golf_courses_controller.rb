@@ -5,6 +5,12 @@ class GolfCoursesController < InheritedResources::Base
     @golf_courses = @search.result(distinct: true)
   end
 
+  def add_to_itinerary(golf_course, itinerary)
+    item = LineItem.create!
+    item.update(golf_course_id: golf_course.id)
+    item.update(itinerary_id: itinerary.id)
+  end
+
 
   def import
     GolfCourse.import(params[:file])

@@ -31,8 +31,8 @@
 			<ul class="timeline">
       <% itinerary.line_items.each_with_index do |line_item, index| %>
                             <% unless index == 0 %>
-                <%= Google::Maps.distance(line_item.golf_club.full_address, itinerary.line_items[index-1].golf_club.full_address) %>
-                <%= Google::Maps.duration(line_item.golf_club.full_address, itinerary.line_items[index-1].golf_club.full_address) %>
+                <%= Google::Maps.distance(line_item.golf_course.golf_club.full_address, itinerary.line_items[index-1].golf_course.golf_club.full_address) %>
+                <%= Google::Maps.duration(line_item.golf_course.golf_club.full_address, itinerary.line_items[index-1].golf_course.golf_club.full_address) %>
                 <%end%>
 				<li>
             
@@ -40,7 +40,7 @@
 
                 
                 <div class="border rounded shadow-sm p-3">
-                <%= link_to "#{line_item.golf_club.club_name}", line_item.golf_club %>
+                <%= link_to "#{line_item.golf_course.course_name}", line_item.golf_course %>
                 </div>
                 
                 
@@ -63,17 +63,6 @@
 	</div>
 </div>
 
-  <% itinerary.line_items.each_with_index do |line_item, index| %>
-    
-    <% unless index == 0 %>
-    <%= Google::Maps.distance(line_item.golf_club.full_address, itinerary.line_items[index-1].golf_club.full_address) %>
-    <%= Google::Maps.duration(line_item.golf_club.full_address, itinerary.line_items[index-1].golf_club.full_address) %>
-    <%end%>
-    <br>
-    <div class="border rounded shadow-sm p-3">
-    <%= link_to "#{line_item.golf_club.club_name}", line_item.golf_club %>
-    </div>
-    <br>
-    <%end%>
+
 <br>
 </div>

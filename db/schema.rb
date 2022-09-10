@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_07_202632) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_10_224655) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -106,7 +106,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_202632) do
     t.float "latitude"
     t.float "longitude"
     t.string "google_places_spot"
-    t.index ["itinerary_id"], name: "index_golf_clubs_on_itinerary_id"
   end
 
   create_table "golf_courses", force: :cascade do |t|
@@ -129,7 +128,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_202632) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "open_date"
+    t.bigint "line_items_id"
     t.index ["golf_club_id"], name: "index_golf_courses_on_golf_club_id"
+    t.index ["line_items_id"], name: "index_golf_courses_on_line_items_id"
   end
 
   create_table "itineraries", force: :cascade do |t|
@@ -153,8 +154,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_202632) do
     t.datetime "time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "golf_club_id", null: false
-    t.index ["golf_club_id"], name: "index_line_items_on_golf_club_id"
+    t.bigint "golf_club_id"
+    t.bigint "golf_course_id"
+    t.index ["golf_course_id"], name: "index_line_items_on_golf_course_id"
     t.index ["itinerary_id"], name: "index_line_items_on_itinerary_id"
   end
 
@@ -183,8 +185,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_202632) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "golf_clubs", "itineraries"
+  add_foreign_key "golf_courses", "line_items", column: "line_items_id"
   add_foreign_key "itineraries", "users"
-  add_foreign_key "line_items", "golf_clubs"
+  add_foreign_key "line_items", "golf_clubs", on_delete: :cascade
+  add_foreign_key "line_items", "golf_courses"
   add_foreign_key "line_items", "itineraries"
 end
