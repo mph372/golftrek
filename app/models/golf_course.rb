@@ -9,6 +9,14 @@ class GolfCourse < ApplicationRecord
         end
     end
 
+    def proper_name
+        if golf_club.golf_courses.count > 1
+          "#{golf_club.club_name} - #{course_name}"
+        else
+          golf_club.club_name
+        end
+      end
+
     def price_range
         if has_prices == true
             average = (weekday_price + twilight_price + weekend_price) / 3

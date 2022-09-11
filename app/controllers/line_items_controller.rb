@@ -10,6 +10,7 @@ class LineItemsController < ApplicationController
     @line_item = LineItem.new
     @line_item.golf_course_id = golf_course.id
     @line_item.itinerary_id = itinerary.id
+    @line_item.set_date
     
     @line_item.save
     respond_to do |format|
@@ -22,6 +23,16 @@ class LineItemsController < ApplicationController
       end
     end
     
+  end
+
+  def destroy
+    
+    @line_item = LineItem.find(params[:id])
+    @line_item.destroy
+    redirect_back(fallback_location: root_path)
+  end  
+
+  def show
   end
 
   private

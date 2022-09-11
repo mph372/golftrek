@@ -8,9 +8,9 @@ Rails.application.routes.draw do
     collection { post :import }
   end
   resources :itineraries
-  resources :line_items do
-    collection { post :add_to_itinerary }
-  end
+  get 'itineraries/:id' => "itineraries#show", as: "itienrary"
+  delete 'itineraries/:id' => "itineraries#destroy"
+
   resources :golf_clubs do
       collection { post :import }
   end

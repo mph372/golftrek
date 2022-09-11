@@ -48,6 +48,8 @@ gem "dead_end"
 gem 'google_places'
 gem 'geocoder'
 gem 'ransack'
+gem "best_in_place", git: "https://github.com/mmotherwell/best_in_place"
+gem "jquery-ui-rails"
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"

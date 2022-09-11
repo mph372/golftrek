@@ -11,10 +11,12 @@
  * It is generally better to create a new file per style scope.
  *
 *= require material_icons
+*= require jquery-ui/datepicker
  */
 
  @import "bootstrap";
  @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,400;0,700;1,400&family=Poppins:ital,wght@0,400;0,700;1,400&family=Raleway:ital,wght@0,400;0,700;1,400&display=swap');
+
 
  body {
     font-family: 'Poppins', sans-serif !important;

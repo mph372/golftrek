@@ -86,8 +86,14 @@
       <% if golf_club.geocoded? %>
       <% @nearby_clubs = golf_club.nearbys(50) %>
         <% @nearby_clubs.each do |nearby_club| %>
-        <%= link_to "#{nearby_club.club_name}", nearby_club %> 
+        <div class="border m-2">
+        <%= link_to "#{nearby_club.club_name}", nearby_club %> - <%= nearby_club.price_range %>
+        <% nearby_club.golf_courses.each do |course| %>
+          <%= course.proper_name %> - <%= button_to 'Add to Itinerary', line_items_path(:golf_course_id => course.id) %>
+        <%end%>
+        
         <%= number_with_precision(Geocoder::Calculations.distance_between(nearby_club, golf_club), precision: 2) %> mi
+        </div>
         <%end%>
       <%end%>
       </div>

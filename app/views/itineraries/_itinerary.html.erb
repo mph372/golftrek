@@ -26,8 +26,8 @@
 
 <div class="container mt-5 mb-5">
 	<div class="row">  
-    <div class="col-md-6 offset-md-3">
-			<h4>Latest News</h4>
+    <div class="">
+			<h4><%= itinerary.title %></h4>
 			<ul class="timeline">
       <% itinerary.line_items.each_with_index do |line_item, index| %>
                             <% unless index == 0 %>
@@ -35,28 +35,24 @@
                 <%= Google::Maps.duration(line_item.golf_course.golf_club.full_address, itinerary.line_items[index-1].golf_course.golf_club.full_address) %>
                 <%end%>
 				<li>
-            
-                
-
-                
                 <div class="border rounded shadow-sm p-3">
-                <%= link_to "#{line_item.golf_course.course_name}", line_item.golf_course %>
+                <div class="row">
+                  <div class="col">
+                    <%= link_to "#{line_item.golf_course.proper_name}", line_item.golf_course.golf_club %>
+                  </div>
+                  <div class="col">
+                     <%= line_item.date %>
+                  </div>
+                  <div class="col">
+                  <%= button_to 'Delete', line_item, :method => :delete, data: { confirm: 'Are you sure?' } %>
+                  </div>
+                
                 </div>
                 
-                
+                </div>
 				</li>
-  
         <%end%>
-				<li>
-					<a href="#">21 000 Job Seekers</a>
-					<a href="#" class="float-right">4 March, 2014</a>
-					<p>Curabitur purus sem, malesuada eu luctus eget, suscipit sed turpis. Nam pellentesque felis vitae justo accumsan, sed semper nisi sollicitudin...</p>
-				</li>
-				<li>
-					<a href="#">Awesome Employers</a>
-					<a href="#" class="float-right">1 April, 2014</a>
-					<p>Fusce ullamcorper ligula sit amet quam accumsan aliquet. Sed nulla odio, tincidunt vitae nunc vitae, mollis pharetra velit. Sed nec tempor nibh...</p>
-				</li>
+		
 			</ul>
 		</div>
 
@@ -66,3 +62,10 @@
 
 <br>
 </div>
+
+<script>
+$(document).ready(function() {
+  /* Activating Best In Place */
+  jQuery(".best_in_place").best_in_place();
+});
+</script>

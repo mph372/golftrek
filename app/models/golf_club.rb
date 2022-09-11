@@ -10,12 +10,51 @@ class GolfClub < ApplicationRecord
       [address, city, state, country].compact.join(', ')
     end
 
+    def course_average_price
+      average_price = []
+      golf_courses.each do |course|
+        average = (course.weekday_price + course.twilight_price + course.weekend_price) / 3
+        average_price.push(average)
+      end
+      average_course_price = average_price.sum / average_price.size
+      return average_course_price
+    end
+
+    def price_range
+      if course_average_price > 0
+          if course_average_price > 0 && course_average_price <= 50
+              return "$"
+          elsif course_average_price > 50 && course_average_price <= 100
+              return "$$"
+          elsif course_average_price > 100 && course_average_price <= 200
+              return "$$$"
+          elsif course_average_price > 200 && course_average_price <= 350
+              return "$$$$"
+          elsif course_average_price > 350 
+              return "$$$$$"
+          end
+      else
+        return "N/A"
+      end
+    end
+
+
+
     def find_google_spot
       if google_places_spot.nil?
         @client = GooglePlaces::Client.new(ENV['google_maps_api'])
         @spot = @client.spots_by_query("#{club_name} golf club #{city} #{state}", detail: true).first
         update(google_places_spot: @spot.place_id)
+        update(permanently_closed: @spot.permanently_closed)
+        update(google_rating: @spot.rating)
       end
+    end
+
+    def update_google_attributes
+      @client = GooglePlaces::Client.new(ENV['google_maps_api'])
+      @spot = @client.spot(google_places_spot)
+      update(permanently_closed: @spot.permanently_closed)
+      update(google_rating: @spot.rating)
     end
 
     def download_google_images

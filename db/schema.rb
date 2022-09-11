@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_10_224655) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_11_033423) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -106,6 +106,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_10_224655) do
     t.float "latitude"
     t.float "longitude"
     t.string "google_places_spot"
+    t.boolean "permanently_closed", default: false
+    t.float "google_rating"
   end
 
   create_table "golf_courses", force: :cascade do |t|
