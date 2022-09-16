@@ -4,6 +4,10 @@ require "rails/all"
 require 'csv'
 require 'roo'
 require 'dead_end'
+require 'uri'
+require 'net/http'
+require 'openssl'
+require "json"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -30,3 +34,7 @@ Google::Maps.configure do |config|
 end
 
 GoogleSearch.api_key = ENV["google_search_api"]
+
+client = OpenWeather::Client.new(
+  api_key: ENV["openweather_api"]
+)

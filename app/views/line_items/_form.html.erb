@@ -1,10 +1,14 @@
-
-<%= form_for(@line_item) do |f| %>
- 
+<%= simple_form_for(@line_item) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="form-inputs">
-   <%= f.hidden_field :itinerary_id, value: current_user.itineraries.last.id %>
-   <%= f.hidden_field :golf_course_id, value: golf_course.id %>
+    <%= f.input :address %>
+    <%= f.input :city %>
+    <%= f.input :state %>
+    <%= f.input :country %>
+    <%= f.input :zip %>
+    <%= f.input :itinerary_id, :input_html => { :value => @itinerary.id }%>
   </div>
 
   <div class="form-actions">

@@ -118,3 +118,8 @@ ul.gallery > li.high {
     grid-row: span 2;
     height: auto; /* to undo the height */
 }
+
+.map {
+  width: 100%;
+  min-height: 400px;
+}

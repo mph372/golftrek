@@ -91,6 +91,8 @@ GEM
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
+    acts_as_list (1.0.4)
+      activerecord (>= 4.2)
     addressable (2.8.1)
       public_suffix (>= 2.0.2, < 6.0)
     ansi (1.5.0)
@@ -146,6 +148,31 @@ GEM
     ethon (0.15.0)
       ffi (>= 1.15.0)
     execjs (2.8.1)
+    faraday (1.10.2)
+      faraday-em_http (~> 1.0)
+      faraday-em_synchrony (~> 1.0)
+      faraday-excon (~> 1.1)
+      faraday-httpclient (~> 1.0)
+      faraday-multipart (~> 1.0)
+      faraday-net_http (~> 1.0)
+      faraday-net_http_persistent (~> 1.0)
+      faraday-patron (~> 1.0)
+      faraday-rack (~> 1.0)
+      faraday-retry (~> 1.0)
+      ruby2_keywords (>= 0.0.4)
+    faraday-em_http (1.0.0)
+    faraday-em_synchrony (1.0.0)
+    faraday-excon (1.1.0)
+    faraday-httpclient (1.0.1)
+    faraday-multipart (1.0.4)
+      multipart-post (~> 2)
+    faraday-net_http (1.0.1)
+    faraday-net_http_persistent (1.2.0)
+    faraday-patron (1.0.0)
+    faraday-rack (1.0.0)
+    faraday-retry (1.0.3)
+    faraday_middleware (1.2.0)
+      faraday (~> 1.0)
     ffi (1.15.5)
     figaro (1.2.0)
       thor (>= 0.14.0, < 2)
@@ -243,6 +270,7 @@ GEM
     msgpack (1.5.6)
     multi_json (1.15.0)
     multi_xml (0.6.0)
+    multipart-post (2.2.3)
     net-http-persistent (4.0.1)
       connection_pool (~> 2.2)
     net-imap (0.2.3)
@@ -266,6 +294,11 @@ GEM
     oga (3.4)
       ast
       ruby-ll (~> 2.1)
+    open-weather-ruby-client (0.2.0)
+      activesupport
+      faraday (>= 1.0.0)
+      faraday_middleware
+      hashie
     orm_adapter (0.5.0)
     parallel (1.22.1)
     parser (3.1.2.1)
@@ -277,6 +310,8 @@ GEM
       nio4r (~> 2.0)
     racc (1.6.0)
     rack (2.2.4)
+    rack-proxy (0.7.4)
+      rack
     rack-test (2.0.2)
       rack (>= 1.3)
     rails (7.0.3.1)
@@ -298,6 +333,7 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.4.3)
       loofah (~> 2.3)
+    rails_sortable (1.5.0)
     railties (7.0.3.1)
       actionpack (= 7.0.3.1)
       activesupport (= 7.0.3.1)
@@ -353,10 +389,13 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    semantic_range (3.0.0)
     simple_form (5.1.0)
       actionpack (>= 5.2)
       activemodel (>= 5.2)
     sixarm_ruby_unaccent (1.2.0)
+    sortablejs-rails (1.15.0)
+      rails (>= 6.0.0, < 8)
     sprockets (4.1.1)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
@@ -394,6 +433,11 @@ GEM
       nokogiri (~> 1.6)
       rubyzip (>= 1.3.0)
       selenium-webdriver (~> 4.0)
+    webpacker (5.4.3)
+      activesupport (>= 5.2)
+      rack-proxy (>= 0.6.1)
+      railties (>= 5.2)
+      semantic_range (>= 2.3.0)
     websocket (1.2.9)
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
@@ -407,6 +451,7 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin
+  acts_as_list (~> 1.0)
   best_in_place!
   better_errors (~> 2.9, >= 2.9.1)
   bootsnap
@@ -431,21 +476,25 @@ DEPENDENCIES
   jquery-ui-rails
   link_thumbnailer
   material_icons
+  open-weather-ruby-client
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.3, >= 7.0.3.1)
+  rails_sortable
   ransack
   roo
   rubocop
   sassc-rails
   selenium-webdriver
   simple_form (~> 5.1)
+  sortablejs-rails (~> 1.10)
   sprockets-rails
   stimulus-rails
   turbo-rails
   tzinfo-data
   web-console
   webdrivers
+  webpacker
 
 RUBY VERSION
    ruby 3.1.2p20

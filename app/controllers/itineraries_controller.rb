@@ -1,5 +1,10 @@
 class ItinerariesController < InheritedResources::Base
 
+
+  def show
+    @line_item = LineItem.new
+    @itinerary = Itinerary.find(params[:id])
+  end
   private
 
   

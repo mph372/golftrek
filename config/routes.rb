@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  get 'line_items/new'
+  resources :favorite_courses
+  get 'line_items/new' => "line_items#new"
   post 'line_items' => "line_items#create"
   get 'line_items/:id' => "line_items#show", as: "line_item"
   delete 'line_items/:id' => "line_items#destroy"
@@ -18,7 +19,10 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   devise_for :users
   get 'home/index'
+
+
   
+
 
 
 

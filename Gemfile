@@ -50,6 +50,10 @@ gem 'geocoder'
 gem 'ransack'
 gem "best_in_place", git: "https://github.com/mmotherwell/best_in_place"
 gem "jquery-ui-rails"
+gem 'open-weather-ruby-client'
+gem 'webpacker'
+gem 'sortablejs-rails', '~> 1.10'
+gem 'rails_sortable'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
@@ -94,3 +98,5 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+gem "acts_as_list", "~> 1.0"

@@ -47,7 +47,8 @@
             <%else%>
             <%=  link_to "#{golf_club.club_name} - #{course.course_name}", course %> 
             <%end%>
-          <%= button_to 'Add to Itinerary', line_items_path(:golf_course_id => course.id) %>
+          <%= button_to 'Add to Itinerary', line_items_path(:golf_course_id => course.id, :itinerary_button => true) %>
+          <%= button_to 'Add to Favorite Courses', line_items_path(:golf_course_id => course.id, :favorites => true) %>
           </div>
           <div class="row">
             <div class="col">

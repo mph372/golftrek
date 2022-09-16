@@ -6,6 +6,7 @@ class GolfClub < ApplicationRecord
     after_validation :geocode
     has_many_attached :images
 
+
     def full_address
       [address, city, state, country].compact.join(', ')
     end
@@ -263,6 +264,14 @@ class GolfClub < ApplicationRecord
       end
   end
 =end
+
+def get_weather
+  url = URI("https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/#{city}?unitGroup=metric&include=current&key=22M3DNK6XR6HVWZVFRHXADCWQ&contentType=json")
+
+  
+ 
+
+end
 
     protected
     

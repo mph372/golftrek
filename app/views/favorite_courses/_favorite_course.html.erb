@@ -1,0 +1,23 @@
+<div id="<%= dom_id favorite_course %>">
+
+<div class="sortable">
+<% @line_items.each_with_sortable_id do |line_item, sortable_id| %>
+
+  <div class="card card-body my-3" id="<%= sortable_id %>">
+    <div class="row">
+      <div class="col">
+        <%= line_item.position + 1%>) <%= link_to "#{line_item.golf_course.proper_name}", line_item.golf_course.golf_club %>
+      </div>
+      <div class="col">
+        <%= button_to 'Delete', line_item, :method => :delete, data: { confirm: 'Are you sure?' } %>
+      </div>
+    </div>
+  </div>
+<%end%>
+
+</div>
+</div>
+
+<script>
+
+</script>

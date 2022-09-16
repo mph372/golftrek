@@ -1,0 +1,10 @@
+<h1>Editing favorite course</h1>
+
+<%= render "form", favorite_course: @favorite_course %>
+
+<br>
+
+<div>
+  <%= link_to "Show this favorite course", @favorite_course %> |
+  <%= link_to "Back to favorite courses", favorite_courses_path %>
+</div>

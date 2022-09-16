@@ -24,6 +24,24 @@
     <%= itinerary.public_itinerary %>
   </p>
 
+  <%= simple_form_for(@line_item) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <%= f.input :address %>
+    <%= f.input :city %>
+    <%= f.input :state %>
+    <%= f.input :country %>
+    <%= f.input :zip %>
+    <%= f.input :itinerary_id, :input_html => { :value => @itinerary.id }%>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
+
 <div class="container mt-5 mb-5">
 	<div class="row">  
     <div class="">
@@ -31,14 +49,18 @@
 			<ul class="timeline">
       <% itinerary.line_items.each_with_index do |line_item, index| %>
                             <% unless index == 0 %>
-                <%= Google::Maps.distance(line_item.golf_course.golf_club.full_address, itinerary.line_items[index-1].golf_course.golf_club.full_address) %>
-                <%= Google::Maps.duration(line_item.golf_course.golf_club.full_address, itinerary.line_items[index-1].golf_course.golf_club.full_address) %>
+                <%= Google::Maps.distance(line_item.line_item_address, itinerary.line_items[index-1].line_item_address) %>
+                <%= Google::Maps.duration(line_item.line_item_address, itinerary.line_items[index-1].line_item_address) %>
                 <%end%>
 				<li>
                 <div class="border rounded shadow-sm p-3">
                 <div class="row">
                   <div class="col">
+                  <% if line_item.golf_course.present? %>
                     <%= link_to "#{line_item.golf_course.proper_name}", line_item.golf_course.golf_club %>
+                  <%else%>
+                    <%= line_item.full_address %>
+                  <%end%>
                   </div>
                   <div class="col">
                      <%= line_item.date %>
