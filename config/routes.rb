@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   post 'line_items' => "line_items#create"
   get 'line_items/:id' => "line_items#show", as: "line_item"
   delete 'line_items/:id' => "line_items#destroy"
+  get 'search_by_city' => "golf_clubs#index"
+  get 'search_by_course' => "golf_courses#index"
   
   resources :golf_courses do
     collection { post :import }

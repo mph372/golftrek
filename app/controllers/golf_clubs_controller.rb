@@ -1,7 +1,7 @@
 class GolfClubsController < InheritedResources::Base
 
   def index
-    @search = GolfClub.ransack(params[:q])
+    @search = GolfClub.near(params[:city],params[:within]).ransack(params[:q])
     @golf_clubs = @search.result(distinct: true)
   end
 

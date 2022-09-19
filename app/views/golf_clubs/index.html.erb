@@ -2,23 +2,29 @@
 
 <h1>Golf clubs</h1>
 
-<%= search_form_for @search do |f| %>
-  <div class="field">
-    <%= f.label :club_name_cont, "Name contains" %>
-    <%= f.text_field :club_name_cont %>
-  </div>
-  <div class="actions"><%= f.submit "Search" %></div>
-<%end%>
 
-<div id="golf_clubs">
+<%= search_form_for @search do |f| %>
+    <%= f.label :city, "City" %>
+     <%= text_field_tag :city, params[:city], {:class => "span1"} %>
+
+    <%= label_tag :within %>
+    <%= text_field_tag :within, params[:within], {:class => "span1"} %> miles
+    <div class="actions"><%= f.submit "Search" %></div>
+<% end %>
+
+<div id="golf_courses">
   <% @golf_clubs.each do |golf_club| %>
-    <p>
-      <%= link_to "#{golf_club.club_name}", golf_club %>
-    </p>
+    <% golf_club.golf_courses.each do |golf_course| %>
+        <p>
+          <%= link_to "#{golf_course.proper_name}", golf_course.golf_club %>
+        </p>
+      <% end %>
   <% end %>
 </div>
 
-<%= link_to "New golf club", new_golf_club_path %>
+
+
+
 
 <%= form_tag import_golf_clubs_path, multipart: true do %>
   <%= file_field_tag :file%>

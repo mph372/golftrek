@@ -1,3 +1,5 @@
+<%= javascript_import_module_tag "example" %>
+
 <div id="<%= dom_id itinerary %>">
   <p>
     <strong>Title:</strong>
@@ -24,11 +26,14 @@
     <%= itinerary.public_itinerary %>
   </p>
 
+  <input id="autocomplete" placeholder="Enter a place" type="text" />
+
   <%= simple_form_for(@line_item) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="form-inputs">
+    <%= f.input :description %>
     <%= f.input :address %>
     <%= f.input :city %>
     <%= f.input :state %>
@@ -59,6 +64,7 @@
                   <% if line_item.golf_course.present? %>
                     <%= link_to "#{line_item.golf_course.proper_name}", line_item.golf_course.golf_club %>
                   <%else%>
+                    <%= line_item.description %><br>
                     <%= line_item.full_address %>
                   <%end%>
                   </div>
@@ -85,9 +91,6 @@
 <br>
 </div>
 
-<script>
-$(document).ready(function() {
-  /* Activating Best In Place */
-  jQuery(".best_in_place").best_in_place();
-});
-</script>
+
+
+  

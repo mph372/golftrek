@@ -8,10 +8,37 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
-    <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['google_maps_api']}&libraries=places&callback=dispatchMapsEvent",
-                            async: true,
-                            defer: true,
-                            "data-turbolinks-eval": false %>
+    <script>
+      let autocomplete;
+      function initAutocomplete() {
+        autocomplete = new google.maps.places.Autocomplete(
+          document.getElementById('autocomplete'),
+          {
+            types: ['establishment'],
+            componentRestrictions: {'country': ['US']},
+            fields: ['place_id', 'geometry', 'name']
+          }
+        );
+        autocomplete.addListener('place_changed', onPlaceChanged);
+      }
+
+      function onPlacedChanged() {
+        var place = autocomplete.getPlace();
+
+        if (!place.geometry) {
+          document.getElementById('autocomplete').placeholder = 
+          'Enter a place';
+        }
+        else {
+          document.getElementById('details').innerHTML = place.name;
+        }
+        
+        
+      }
+      </script>
+    <script async
+    src="https://maps.googleapis.com/maps/api/js?key=<%=ENV['google_maps_api']%>&libraries=places&callback=initAutocomplete">
+    </script>
   </head>
   
     <body>

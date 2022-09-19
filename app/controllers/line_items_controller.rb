@@ -67,6 +67,6 @@ class LineItemsController < ApplicationController
   private
 
   def line_item_params
-    params.require(:line_item).permit(:golf_club_id, :itinerary_id, :golf_club, :itinerary, :golf_course_id, :address, :city, :state, :zip, :country)
+    params.require(:line_item).permit(:golf_club_id, :itinerary_id, :golf_club, :itinerary, :golf_course_id, :address, :city, :state, :zip, :country, :description)
   end
 end
