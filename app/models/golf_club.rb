@@ -48,6 +48,7 @@ class GolfClub < ApplicationRecord
         update(google_places_spot: @spot.place_id)
         update(permanently_closed: @spot.permanently_closed)
         update(google_rating: @spot.rating)
+        return google_rating
       end
     end
 

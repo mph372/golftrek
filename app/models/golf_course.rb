@@ -9,11 +9,11 @@ class GolfCourse < ApplicationRecord
         end
     end
 
-    def proper_name
+    def save_full_name
         if golf_club.golf_courses.count > 1
-          "#{golf_club.club_name} - #{course_name}"
+          update(course_full_name: "#{golf_club.club_name} - #{course_name}")
         else
-          golf_club.club_name
+            update(course_full_name: "#{golf_club.club_name}")
         end
       end
 
@@ -66,6 +66,7 @@ class GolfCourse < ApplicationRecord
             t.green = row["green"]
             t.save
             t.associate_golf_clubs
+            t.save_full_name
         end
     end
 

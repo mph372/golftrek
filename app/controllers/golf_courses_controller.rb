@@ -2,7 +2,9 @@ class GolfCoursesController < InheritedResources::Base
 
   def index
     @search = GolfCourse.ransack(params[:q])
+    if (params[:course_name_cont] != "") then
     @golf_courses = @search.result(distinct: true)
+    end
   end
 
   def add_to_itinerary(golf_course, itinerary)

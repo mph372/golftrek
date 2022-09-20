@@ -1,4 +1,4 @@
-<%= javascript_import_module_tag "example" %>
+
 
 <div id="<%= dom_id itinerary %>">
   <p>
@@ -26,26 +26,15 @@
     <%= itinerary.public_itinerary %>
   </p>
 
-  <input id="autocomplete" placeholder="Enter a place" type="text" />
-
-  <%= simple_form_for(@line_item) do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-
-  <div class="form-inputs">
-    <%= f.input :description %>
-    <%= f.input :address %>
-    <%= f.input :city %>
-    <%= f.input :state %>
-    <%= f.input :country %>
-    <%= f.input :zip %>
-    <%= f.input :itinerary_id, :input_html => { :value => @itinerary.id }%>
-  </div>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
+<%= form_for @line_item do |form| %>
+  <%= form.text_field :address, data:{ type: 'date'}, id: 'autocomplete' %>
+  <%= form.hidden_field :itinerary_id, :value => @itinerary.id %>
+  <%= form.submit %>
 <% end %>
+
+  
+
+  
 
 <div class="container mt-5 mb-5">
 	<div class="row">  
@@ -62,7 +51,7 @@
                 <div class="row">
                   <div class="col">
                   <% if line_item.golf_course.present? %>
-                    <%= link_to "#{line_item.golf_course.proper_name}", line_item.golf_course.golf_club %>
+                    <%= link_to "#{line_item.golf_course.course_full_name}", line_item.golf_course.golf_club %>
                   <%else%>
                     <%= line_item.description %><br>
                     <%= line_item.full_address %>
@@ -91,6 +80,3 @@
 <br>
 </div>
 
-
-
-  

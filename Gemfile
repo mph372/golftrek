@@ -100,3 +100,5 @@ group :test do
 end
 
 gem "acts_as_list", "~> 1.0"
+
+gem "hotwire-rails", "~> 0.1.3"

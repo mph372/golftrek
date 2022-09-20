@@ -4,19 +4,20 @@
 
 <%= search_form_for @search do |f| %>
   <div class="field">
-    <%= f.label :course_name_cont, "Name contains" %>
-    <%= f.text_field :course_name_cont %>
+    <%= f.label :course_full_name_cont, "Name contains" %>
+    <%= f.text_field :course_full_name_cont %>
   </div>
   <div class="actions"><%= f.submit "Search" %></div>
 <%end%>
-
+<% if params[:q].present? %>
 <div id="golf_courses">
   <% @golf_courses.each do |golf_course| %>
     <p>
-      <%= link_to "#{golf_course.course_name}", golf_course %>
+      <%= link_to "#{golf_course.course_full_name}", golf_course.golf_club %>
     </p>
   <% end %>
 </div>
+<%end%>
 
 <%= form_tag import_golf_courses_path, multipart: true do %>
   <%= file_field_tag :file%>

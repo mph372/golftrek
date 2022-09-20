@@ -16,7 +16,7 @@
   <% @golf_clubs.each do |golf_club| %>
     <% golf_club.golf_courses.each do |golf_course| %>
         <p>
-          <%= link_to "#{golf_course.proper_name}", golf_course.golf_club %>
+          <%= link_to "#{golf_course.course_full_name}", golf_course.golf_club %> - <%= number_with_precision(Geocoder::Calculations.distance_between(params[:city], golf_course.golf_club), precision: 2) %> mi - <%= golf_course.golf_club.google_rating %>
         </p>
       <% end %>
   <% end %>
